@@ -6,18 +6,19 @@ import (
 )
 
 func WordCount(s string) map[string]int {
-	// Creating a slice of words from the `s` using whitespace as the delimiter.
+	// Creating a slice of words from the string `s` using whitespace as the delimiter.
 	words := strings.Fields(s)
 	
 	// Creating an empty map to store word frequencies.
-	// The keys represent unique words, and the values store their respective 		// counts.
+	// The keys represent unique words, and the values store their respective counts.
+	// Remember that initial values are respective zero values i.e. "" and 0
 	wordMap := make(map[string]int)
 	
 	// Looping through the values in the slice of words
-	for _, v := range words{
-		// Incrementing the count for the word in the map.
-		wordMap[v] = wordMap[v] + 1
-		// alternatively use: wordMap[v]++
+	for _, word := range words{
+		// Incrementing the count per occurence of a word in the map.
+		wordMap[word] = wordMap[word] + 1
+		// alternatively use: wordMap[word]++
 	}
 	return wordMap
 }
@@ -25,6 +26,7 @@ func WordCount(s string) map[string]int {
 func main() {
 	wc.Test(WordCount)
 }
+
 
 
 // Below are the expected outputs from the test file for the above code:
