@@ -8,10 +8,11 @@ func fibonacci() func() int {
 	// Initialize the first two numbers in the Fibonacci sequence
 	n2, n1 := 0, 1
 	return func() int {
+		result := n2 // Store the current Fibonacci number including the initial 0
 		// Update the sequence: 
 		// n2 takes the value of n1, and n1 becomes the sum of both
 		n2, n1 = n1, n1+n2
-		return n2 // Return the next Fibonacci number
+		return result // Return the Fibonacci number
 	}
 }
 
