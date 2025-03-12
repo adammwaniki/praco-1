@@ -1,41 +1,34 @@
 package main
 
-import "golang.org/x/tour/pic"
+import (
+	"image"
+	"image/color"
 
-type Image struct{}
+	"golang.org/x/tour/pic"
+)
 
-func main() {
-	m := Image{}
-	pic.ShowImage(m)
+// Define Image type
+type Image struct {
+	width, height int
 }
 
-/*
-package main
+// Implement the Bounds method
+func (img Image) Bounds() image.Rectangle {
+	return image.Rect(0, 0, img.width, img.height)
+}
 
-import "golang.org/x/tour/pic"
+// Implement the ColorModel method
+func (img Image) ColorModel() color.Model {
+	return color.RGBAModel
+}
 
-func Pic(dx, dy int) [][]uint8 {
-	// Declaring a slice of slices called `pic` with a length of `dy`.
-	// Each inner slice will store values of type uint8.
-	pic := make([][]uint8, dy)
-
-	// At the moment the outer slice is empty and each inner slice is nil
-	// Looping through the values in the range of the outer slice by index to initialize each inner slice
-	for i := range pic {
-		// Allocating a slice of uint8 with a length of `dx` at each `pic[i]`.
-		pic[i] = make([]uint8, dx)
-
-		// Looping through the inner slice to assign values.
-		for j := range pic[i] {
-			// Setting the value of each element in both the outer and inner slices.
-			pic[i][j] = uint8((i^j))
-		}
-	}
-	// returning the 2D slice with populated values
-	return pic
+// Implement the At method
+func (img Image) At(x, y int) color.Color {
+	v := uint8(x ^ y) // XOR function to generate patterns or (x+y)/2 or x*y
+	return color.RGBA{v, v, 255, 255} // Blue-tinted pattern
 }
 
 func main() {
-	pic.Show(Pic)
+	m := Image{256, 256} // Create an instance of Image with dimensions 256x256
+	pic.ShowImage(m)     // Display the generated image
 }
-*/
